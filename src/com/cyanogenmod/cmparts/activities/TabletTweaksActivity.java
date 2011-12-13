@@ -38,7 +38,7 @@ public class TabletTweaksActivity extends PreferenceActivity implements OnPrefer
     private static final String PREF_UNHIDE_BUTTON = "pref_unhide_button";
     private static final String PREF_EXTEND_PM = "pref_extend_pm";
     // cm71 nightlies: will be re-enabled there
-    //private static final String PREF_REVERSE_VOLUME_BEHAVIOR = "pref_reverse_volume_behavior";
+    private static final String PREF_REVERSE_VOLUME_BEHAVIOR = "pref_reverse_volume_behavior";
     private static final String PREF_GENERAL_CATEGORY = "pref_general_category";
     private static final String PREF_INTERFACE_CATEGORY = "pref_interface_category";
     private static final String PREF_BUTTON_CATEGORY = "pref_button_category";
@@ -52,7 +52,7 @@ public class TabletTweaksActivity extends PreferenceActivity implements OnPrefer
     private CheckBoxPreference mDisableFullscreen;
     private CheckBoxPreference mExtendPm;
     // cm71 nightlies: will be re-enabled there
-    //private CheckBoxPreference mReverseVolumeBehavior;
+    private CheckBoxPreference mReverseVolumeBehavior;
     private ListPreference mUnhideButton;
 
     @Override
@@ -72,7 +72,7 @@ public class TabletTweaksActivity extends PreferenceActivity implements OnPrefer
         mUnhideButton = (ListPreference) prefSet.findPreference(PREF_UNHIDE_BUTTON);
         mExtendPm = (CheckBoxPreference) prefSet.findPreference(PREF_EXTEND_PM);
         // cm71 nightlies: will be re-enabled there
-        //mReverseVolumeBehavior = (CheckBoxPreference) prefSet.findPreference(PREF_REVERSE_VOLUME_BEHAVIOR);
+        mReverseVolumeBehavior = (CheckBoxPreference) prefSet.findPreference(PREF_REVERSE_VOLUME_BEHAVIOR);
 
         int defValue;
 
@@ -96,8 +96,8 @@ public class TabletTweaksActivity extends PreferenceActivity implements OnPrefer
                 Settings.System.EXTEND_PM, defValue) == 1));
         defValue=CmSystem.getDefaultBool(getBaseContext(), CmSystem.CM_DEFAULT_REVERSE_VOLUME_BEHAVIOR)==true ? 1 : 0;
         // cm71 nightlies: will be re-enabled there
-        //mReverseVolumeBehavior.setChecked((Settings.System.getInt(getContentResolver(),
-                //Settings.System.REVERSE_VOLUME_BEHAVIOR, defValue) == 1));
+        mReverseVolumeBehavior.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.REVERSE_VOLUME_BEHAVIOR, defValue) == 1));
 
         defValue=CmSystem.getDefaultInt(getBaseContext(), CmSystem.CM_DEFAULT_UNHIDE_BUTTON_INDEX);
         mUnhideButton.setOnPreferenceChangeListener(this);
@@ -165,13 +165,13 @@ public class TabletTweaksActivity extends PreferenceActivity implements OnPrefer
                     value ? 1 : 0);
             return true;
         // cm71 nightlies: will be re-enabled there
-        /*
+        
         } else if (preference == mReverseVolumeBehavior) {
             value = mReverseVolumeBehavior.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.REVERSE_VOLUME_BEHAVIOR,
                     value ? 1 : 0);
             updateDependencies();
-            return true;*/
+            return true;
         }
 
         return false;
@@ -193,11 +193,11 @@ public class TabletTweaksActivity extends PreferenceActivity implements OnPrefer
         }
 
         // cm71 nightlies: will be re-enabled there
-        /*
+        
         if(mReverseVolumeBehavior.isChecked())
             mReverseVolumeBehavior.setSummary(R.string.tablet_tweaks_reverse_volume_behavior_summary_on);
         else
             mReverseVolumeBehavior.setSummary(R.string.tablet_tweaks_reverse_volume_behavior_summary_off);
-        */
+        
     }
 }

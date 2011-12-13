@@ -51,6 +51,20 @@
         <item>2</item>
     </string-array>
 
+    <string-array name="entries_status_bar_carrier_label" translatable="false">
+	<item>@string/ui_status_bar_carrier_label_use_default</item>
+	<item>@string/ui_status_bar_carrier_label_use_spn</item>
+	<item>@string/ui_status_bar_carrier_label_use_plmn</item>
+	<item>@string/ui_status_bar_carrier_label_use_custom</item>
+    </string-array>
+
+    <string-array name="values_status_bar_carrier_label" translatable="false">
+	<item>0</item>
+	<item>1</item>
+	<item>2</item>
+	<item>3</item>
+    </string-array>
+
     <string-array name="entries_status_bar_am_pm">
         <item>Normal</item>
         <item>Small</item>
@@ -422,13 +436,13 @@
     </string-array>
 
    <string-array name="entries_brightness_widget" formatted="false" translatable="false">
-        <item>@string/cm_brightness_mode_auto</item>
-        <item>@string/cm_brightness_mode_dim</item>
+	<item>@string/cm_brightness_mode_dim</item>
         <item>25%</item>
+	<item>40%</item>
         <item>50%</item>
         <item>75%</item>
         <item>100%</item>
-    </string-array>
+   </string-array>
 
    <string-array name="values_brightness_widget" translatable="false">
         <item>0</item>
@@ -522,13 +536,12 @@
         <item>@string/gestures_next</item>
         <item>@string/gestures_previous</item>
         <item>@string/gestures_playpause</item>
-        <item>@string/gestures_flashlight</item>
+	<item>@string/gestures_flashlight</item>
     </string-array>
 
     <string-array name="pref_lockscreen_style_entries">
         <item>Sliding Tab</item>
         <item>Rotary</item>
-        <item>Rotary revamped</item>
         <item>Lense</item>
         <item>Ring</item>
     </string-array>
@@ -536,22 +549,39 @@
     <string-array name="pref_lockscreen_style_values" translatable="false">
         <item>1</item>
         <item>2</item>
-        <item>3</item>
         <item>4</item>
         <item>5</item>
+    </string-array>
+
+    <string-array name="pref_rotary_style_entries">
+        <item>Normal style</item>
+        <item>Revamped style</item>
+    </string-array>
+
+    <string-array name="pref_rotary_style_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string-array name="pref_ringlock_style_entries">
+        <item>Bubble style</item>
+        <item>Revamped style</item>
+    </string-array>
+
+    <string-array name="pref_ringlock_style_values" translatable="false">
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <string-array name="pref_in_call_style_entries">
         <item>Sliding Tab</item>
         <item>Rotary</item>
-        <item>Rotary revamped</item>
         <item>Ring</item>
     </string-array>
 
     <string-array name="pref_in_call_style_values" translatable="false">
         <item>1</item>
         <item>2</item>
-        <item>3</item>
         <item>4</item>
     </string-array>
 

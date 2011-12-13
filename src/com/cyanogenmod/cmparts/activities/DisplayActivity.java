@@ -18,6 +18,8 @@ package com.cyanogenmod.cmparts.activities;
 
 import com.cyanogenmod.cmparts.R;
 
+import android.content.res.Resources;
+import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
@@ -71,10 +73,12 @@ public class DisplayActivity extends PreferenceActivity implements OnPreferenceC
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
-        /* Preference Screens */
+        Resources res = getResources();
+
         mBacklightScreen = (PreferenceScreen) prefSet.findPreference(BACKLIGHT_SETTINGS);
-        // No reason to show backlight if no light sensor on device
-        if (((SensorManager) getSystemService(SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
+	// No reason to show backlight if no light sensor on device
+        /* Hide backlight settings if unsupported */
+	if (((SensorManager) getSystemService(SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
             ((PreferenceCategory) prefSet.findPreference(GENERAL_CATEGORY))
                     .removePreference(mBacklightScreen);
         }

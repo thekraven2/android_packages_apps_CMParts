@@ -9,7 +9,8 @@
     <string name="application_settings_summary_head">Application moving, install location, communication filtering</string>
     <string name="display_settings_title_head">Display</string>
     <string name="display_settings_title_subhead">Display settings</string>
-    <string name="display_settings_summary_head">Display animations, rotation, timeouts</string>
+    <string name="display_settings_summary_head">Display backlight, animations, rotation</string>
+    <string name="display_settings_summary_head_nobacklight">Display animations, rotation</string>
     <string name="input_settings_title_head">Input</string>
     <string name="input_settings_title_subhead">Input settings</string>
     <string name="input_settings_summary_head">Input behavior, buttons, haptic feedback</string>
@@ -95,10 +96,22 @@
     <string name="ui_status_bar_am_pm_summary">Display style of AM/PM next to clock</string>
     <string name="ui_status_bar_clock_title">Show clock</string>
     <string name="ui_status_bar_clock_summary">Status bar clock will be hidden, if disabled</string>
+    <string name="ui_status_bar_centerclock_title">Center clock</string>
+    <string name="ui_status_bar_centerclock_summary">Clock will be centered if checked. Uncheck to move to the right.</string>
+    <string name="ui_status_bar_clockcolor_title">Clock color</string>
+    <string name="ui_status_bar_clockcolor_summary">#ffffffff</string>
     <string name="ui_status_bar_battery_title">Battery status style</string>
     <string name="ui_status_bar_battery_summary">Display style of battery status</string>
     <string name="ui_status_bar_compact_carrier_title">Compact carrier label</string>
     <string name="ui_status_bar_compact_carrier_summary">Use alternate notification dropdown layout with mini carrier label</string>
+    <string name="ui_status_bar_carrier_label_title">Carrier label type</string>
+    <string name="ui_status_bar_carrier_label_summary">Change what is used as carrier label</string>
+    <string name="ui_status_bar_carrier_label_use_default">Default</string>
+    <string name="ui_status_bar_carrier_label_use_spn">Show SPN</string>
+    <string name="ui_status_bar_carrier_label_use_plmn">Show PLMN</string>
+    <string name="ui_status_bar_carrier_label_use_custom">Custom text</string>
+    <string name="ui_status_bar_carrier_label_custom_title">Custom carrier label</string>
+    <string name="ui_status_bar_carrier_label_custom_summary">Text used instead of the operator provided carrier label</string>
     <string name="ui_status_bar_toggle_brightness">Status bar brightness control</string>
     <string name="ui_status_bar_toggle_brightness_summary">Allows adjusting of brightness by sliding across statusbar</string>
     <string name="ui_status_bar_toggle_info">Automatic brightness is enabled</string>
@@ -151,6 +164,15 @@
     <!-- Color Picker -->
     <string name="title_color_picker">Pick a color</string>
     <string name="msg_color_picker">Tap on center color to confirm.\nPress back to cancel</string>
+
+    <!-- User interface: Boot animation -->
+    <string name="ui_bootanim_cat_title">Boot animation</string>
+    <string name="bootanimation_title">Choose</string>
+    <string name="bootanimation_summary">Choose a custom boot animation from your sd card</string>
+    <string name="bootanimation_preview_title">Preview</string>
+    <string name="bootanimation_preview_summary">Preview boot animation</string>
+    <string name="bootanimation_reset_title">Restore</string>
+    <string name="bootanimation_reset_summary">Restore to default boot animation</string>
 
     <!-- User interface: LED notifications -->
     <string name="group_settings">Settings</string>
@@ -315,6 +337,10 @@
     <string name="pref_lockscreen_rotary_hide_arrows_summary">Hides the directional hint arrows on rotary style</string>
     <string name="pref_lockscreen_style_title">Lockscreen style</string>
     <string name="pref_lockscreen_style_summary">Choose the style of the lockscreen</string>
+    <string name="pref_rotary_style_title">Rotary style</string>
+    <string name="pref_rotary_style_summary">Choose the style of the rotary wheel</string>
+    <string name="pref_ringlock_style_title">Ring-Lock style</string>
+    <string name="pref_ringlock_style_summary">Choose the style of the lock rings</string>
     <string name="pref_in_call_style_title">Incoming call style</string>
     <string name="pref_in_call_style_summary">Choose the style of the incoming calls accept/reject widget</string>
     <string name="lockscreen_music_title">Music Controls</string>
@@ -443,6 +469,10 @@
     <string name="pref_heapsize_title">VM heap size</string>
     <string name="pref_heapsize_summary">Maximum amount of memory per VM heap (requires reboot)</string>
 
+    <!-- Performance : Disable bootanimation -->
+    <string name="pref_disable_bootanimation_title">Disable boot animation</string>
+    <string name="pref_disable_bootanimation_summary">Don\'t show the boot animation for faster boot</string>	
+
     <!-- Performance : Lock home memory -->
     <string name="pref_lock_home_title">Lock home in memory</string>
     <string name="pref_lock_home_summary">Attempt to keep the current home app in memory at all times</string>
@@ -555,8 +585,11 @@
     <string name="title_button_modes">Button modes</string>
     <string name="pref_brightness_mode_title">Brightness modes</string>
     <string name="pref_brightness_mode_summary">Choose how the brightness button changes modes</string>
-    <string name="cm_brightness_mode_auto">Auto</string>
     <string name="cm_brightness_mode_dim">Dim</string>
+    <string name="cm_brightness_mode_100">100%</string>
+    <string name="cm_brightness_mode_50">50%</string>
+    <string name="cm_brightness_mode_25">25%</string>
+    <string name="cm_brightness_mode_15">15%</string>
     <string name="pref_network_mode_title">Network modes</string>
     <string name="pref_network_mode_summary">Choose how the NetworkMode button changes modes</string>
     <string name="pref_screentimeout_mode_title">Screentimeout modes</string>
@@ -623,6 +656,9 @@
     <string name="sound_camera_shutter_disable_summary_off">Shutter sound will be played</string>
     <string name="sound_camera_shutter_disable_warning_title">WARNING: This may be illegal!</string>
     <string name="sound_camera_shutter_disable_warning">Disabling camera shutter sound is illegal in some areas. Are you sure you want to disable it?</string>
+    <string name="sound_camera_focus_mute_title">Mute camera focus</string>
+    <string name="sound_camera_focus_mute_summary_on">Focus sound will not be played</string>
+    <string name="sound_camera_focus_mute_summary_off">Focus sound will be played</string>
     <string name="sound_to_speaker_title">Always play on speaker</string>
     <string name="sound_notifications_title">Notifications</string>
     <string name="sound_rings_title">Ring tones</string>

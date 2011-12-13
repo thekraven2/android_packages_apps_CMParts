@@ -19,12 +19,16 @@ package com.cyanogenmod.cmparts.activities;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.ListPreference;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.Preference.OnPreferenceChangeListener;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceScreen;
 import android.provider.Settings;
 import android.provider.Settings.SettingNotFoundException;
+import android.text.InputFilter;
+import android.text.InputFilter.LengthFilter;
+import android.widget.EditText;
 
 import com.cyanogenmod.cmparts.R;
 
@@ -36,10 +40,17 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
 
     private static final String PREF_STATUS_BAR_CLOCK = "pref_status_bar_clock";
 
+    private static final String PREF_STATUS_BAR_CENTERCLOCK = "pref_status_bar_centerclock";
+
+    private static final String PREF_STATUS_BAR_CLOCKCOLOR = "pref_status_bar_clockcolor";
+
+    private static final String PREF_STATUS_BAR_CARRIER_LABEL = "pref_status_bar_carrier_label";
+	
+    private static final String PREF_STATUS_BAR_CARRIER_LABEL_CUSTOM = "pref_status_bar_carrier_label_custom";
+
     private static final String PREF_STATUS_BAR_COMPACT_CARRIER = "pref_status_bar_compact_carrier";
 
-    private static final String PREF_STATUS_BAR_BRIGHTNESS_CONTROL =
-            "pref_status_bar_brightness_control";
+    private static final String PREF_STATUS_BAR_BRIGHTNESS_CONTROL = "pref_status_bar_brightness_control";
 
     private static final String PREF_STATUS_BAR_CM_SIGNAL = "pref_status_bar_cm_signal";
 
@@ -51,11 +62,19 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
 
     private ListPreference mStatusBarCmSignal;
 
+    private ListPreference mStatusBarCarrierLabel;
+
     private CheckBoxPreference mStatusBarClock;
+
+    private CheckBoxPreference mStatusBarCenterClock;
+
+    private Preference mStatusBarClockColor;
 
     private CheckBoxPreference mStatusBarCompactCarrier;
 
     private CheckBoxPreference mStatusBarBrightnessControl;
+
+    private EditTextPreference mStatusBarCarrierLabelCustom;
 
     private CheckBoxPreference mStatusBarHeadset;
 
@@ -69,6 +88,10 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
         PreferenceScreen prefSet = getPreferenceScreen();
 
         mStatusBarClock = (CheckBoxPreference) prefSet.findPreference(PREF_STATUS_BAR_CLOCK);
+	mStatusBarCenterClock = (CheckBoxPreference) prefSet.findPreference(PREF_STATUS_BAR_CENTERCLOCK);
+        mStatusBarClockColor = (Preference) prefSet.findPreference(PREF_STATUS_BAR_CLOCKCOLOR);
+        mStatusBarClockColor.setSummary(Integer.toHexString(getClockColor()));
+        mStatusBarClockColor.setOnPreferenceChangeListener(this);
         mStatusBarCompactCarrier = (CheckBoxPreference) prefSet
                 .findPreference(PREF_STATUS_BAR_COMPACT_CARRIER);
         mStatusBarBrightnessControl = (CheckBoxPreference) prefSet
@@ -78,6 +101,8 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
 
         mStatusBarClock.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUS_BAR_CLOCK, 1) == 1));
+     	mStatusBarCenterClock.setChecked((Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_CENTERCLOCK, 1) == 1));
         mStatusBarCompactCarrier.setChecked((Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUS_BAR_COMPACT_CARRIER, 0) == 1));
         mStatusBarBrightnessControl.setChecked((Settings.System.getInt(getContentResolver(),
@@ -98,11 +123,11 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
         mStatusBarBattery = (ListPreference) prefSet.findPreference(PREF_STATUS_BAR_BATTERY);
         mStatusBarCmSignal = (ListPreference) prefSet.findPreference(PREF_STATUS_BAR_CM_SIGNAL);
 
-        int statusBarAmPm = Settings.System.getInt(getContentResolver(),
-                Settings.System.STATUS_BAR_AM_PM, 2);
-        mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
-        mStatusBarAmPm.setOnPreferenceChangeListener(this);
-
+	int statusBarAmPm = Settings.System.getInt(getContentResolver(),
+		Settings.System.STATUS_BAR_AM_PM, 2);
+	mStatusBarAmPm.setValue(String.valueOf(statusBarAmPm));
+	mStatusBarAmPm.setOnPreferenceChangeListener(this);
+	
         int statusBarBattery = Settings.System.getInt(getContentResolver(),
                 Settings.System.STATUS_BAR_BATTERY, 0);
         mStatusBarBattery.setValue(String.valueOf(statusBarBattery));
@@ -112,6 +137,39 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
                 Settings.System.STATUS_BAR_CM_SIGNAL_TEXT, 0);
         mStatusBarCmSignal.setValue(String.valueOf(signalStyle));
         mStatusBarCmSignal.setOnPreferenceChangeListener(this);
+
+        mStatusBarCarrierLabel = (ListPreference) prefSet.findPreference(PREF_STATUS_BAR_CARRIER_LABEL);
+        mStatusBarCarrierLabelCustom = (EditTextPreference) prefSet.findPreference(PREF_STATUS_BAR_CARRIER_LABEL_CUSTOM);
+
+        if (mStatusBarCarrierLabelCustom != null) {
+            EditText carrierEditText = mStatusBarCarrierLabelCustom.getEditText();
+
+            if (carrierEditText != null) {
+                InputFilter lengthFilter = new InputFilter.LengthFilter(20);
+                carrierEditText.setFilters(new InputFilter[]{lengthFilter});
+                carrierEditText.setSingleLine(true);
+            }
+        }
+
+        int statusBarCarrierLabel = Settings.System.getInt(getContentResolver(),
+                Settings.System.CARRIER_LABEL_TYPE, 0);
+        String statusBarCarrierLabelCustom = Settings.System.getString(getContentResolver(),
+                Settings.System.CARRIER_LABEL_CUSTOM_STRING);
+
+        if (statusBarCarrierLabelCustom == null) {
+            statusBarCarrierLabelCustom = "CyanogenMod 7";
+            Settings.System.putString(getContentResolver(),
+                    Settings.System.CARRIER_LABEL_CUSTOM_STRING,
+		    statusBarCarrierLabelCustom);
+	}
+
+        mStatusBarCarrierLabel.setValue(String.valueOf(statusBarCarrierLabel));
+        mStatusBarCarrierLabel.setOnPreferenceChangeListener(this);
+
+        mStatusBarCarrierLabelCustom.setText(statusBarCarrierLabelCustom);
+        mStatusBarCarrierLabelCustom.setOnPreferenceChangeListener(this);
+        mStatusBarCarrierLabelCustom.setEnabled(
+                statusBarCarrierLabel == 3);
     }
 
     public boolean onPreferenceChange(Preference preference, Object newValue) {
@@ -130,6 +188,18 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
             Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_CM_SIGNAL_TEXT,
                     signalStyle);
             return true;
+        } else if (preference == mStatusBarCarrierLabel) {
+            int carrierLabelType = Integer.valueOf((String) newValue);
+            mStatusBarCarrierLabelCustom.setEnabled(carrierLabelType == 3);
+            Settings.System.putInt(getContentResolver(), Settings.System.CARRIER_LABEL_TYPE,
+                    carrierLabelType);
+            return true;
+        } else if (preference == mStatusBarCarrierLabelCustom) {
+            String carrierLabelCustom = String.valueOf(newValue);
+            Settings.System.putString(getContentResolver(),
+                    Settings.System.CARRIER_LABEL_CUSTOM_STRING,
+                    carrierLabelCustom);
+            return true;
         }
         return false;
     }
@@ -142,6 +212,15 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
             value = mStatusBarClock.isChecked();
             Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_CLOCK,
                     value ? 1 : 0);
+            return true;
+        } else if (preference == mStatusBarCenterClock) {
+            value = mStatusBarCenterClock.isChecked();
+            Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_CENTERCLOCK,
+                    value ? 1 : 0);
+            return true;
+        } else if (preference == mStatusBarClockColor) {
+            ColorPickerDialog cp = new ColorPickerDialog(this, mClockColorListener, getClockColor());
+            cp.show();
             return true;
         } else if (preference == mStatusBarCompactCarrier) {
             value = mStatusBarCompactCarrier.isChecked();
@@ -161,4 +240,19 @@ public class UIStatusBarActivity extends PreferenceActivity implements OnPrefere
         }
         return false;
     }
+
+    private int getClockColor() {
+        return Settings.System.getInt(getContentResolver(),
+                Settings.System.STATUS_BAR_CLOCKCOLOR, 1);
+    }
+
+    ColorPickerDialog.OnColorChangedListener mClockColorListener =
+        new ColorPickerDialog.OnColorChangedListener() {
+            public void colorChanged(int color) {
+                Settings.System.putInt(getContentResolver(), Settings.System.STATUS_BAR_CLOCKCOLOR, color);
+                mStatusBarClockColor.setSummary(Integer.toHexString(color));
+            }
+            public void colorUpdate(int color) {
+            }
+    };
 }
