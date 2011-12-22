@@ -17,11 +17,25 @@
 			android:summary="@string/sound_volume_control_silent_summary"
 			android:persistent="false" />
 
+		<ListPreference android:key="swap-vol-keys"
+                        android:title="@string/sound_swap_volume_keys_title"
+		        android:dialogTitle="@string/sound_swap_volume_keys_dialog"
+		        android:entries="@array/swap_volume_keys_orientation_list_entries"
+		        android:entryValues="@array/swap_volume_keys_orientation_list_values"
+		        android:persistent="false" />
+
         <!-- Vibrate on call -->
 		<CheckBoxPreference android:key="vibrate-in-call"
 			android:title="@string/sound_vibrate_in_call_title"
 			android:summaryOn="@string/sound_vibrate_in_call_summary_on"
 			android:summaryOff="@string/sound_vibrate_in_call_summary_off"
+			android:persistent="false" />
+
+		<!--  Volume key beeps -->
+	        <CheckBoxPreference android:key="volume-key-beeps"
+			android:title="@string/sound_volume_key_beeps_title"
+			android:summaryOn="@string/sound_volume_key_beeps_summary_on"
+			android:summaryOff="@string/sound_volume_key_beeps_summary_off"
 			android:persistent="false" />
 
 		<PreferenceScreen android:key="sound_category_quiet_hours"

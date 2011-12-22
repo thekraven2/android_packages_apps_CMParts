@@ -695,6 +695,16 @@
         <item>9</item>
     </string-array>
 
+    <string-array name="entries_overscroll_color">
+        <item>Default color</item>
+        <item>Custom color</item>
+    </string-array>
+
+    <string-array name="values_overscroll_color" translatable="false">
+        <item>0</item>
+        <item>1</item>
+    </string-array>
+
     <string-array name="phone_goggles_confirmation_values" translatable="false">
         <item>0</item>
         <item>1</item>
@@ -717,6 +727,22 @@
         <item>@string/phone_goggles_maths_level_easy</item>
         <item>@string/phone_goggles_maths_level_medium</item>
         <item>@string/phone_goggles_maths_level_hard</item>
+    </string-array>
+
+    <string-array name="swap_volume_keys_orientation_list_entries" translatable="true">
+        <item>Never</item>
+        <item>0-degrees</item>
+        <item>90-degrees</item>
+        <item>180-degrees</item>
+        <item>270-degrees</item>
+    </string-array>
+
+    <string-array name="swap_volume_keys_orientation_list_values" translatable="false">
+        <item>-1</item>
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
     </string-array>
 
     <string-array name="entries_vol_actions">

@@ -147,6 +147,8 @@
     <string name="pref_overscroll_summary">Choose how scrollable objects look when they overshoot</string>
     <string name="pref_overscroll_weight_title">Overscrolling weight</string>
     <string name="pref_overscroll_weight_summary">Select the weight of the scrollable objects</string>
+    <string name="pref_overscroll_color_title">Overscroll color</string>
+    <string name="pref_overscroll_color_summary">Select the color of the overscroll</string>
 
     <!-- User interface : Lock Screen -->
     <string name="pref_lockscreen_delay_title">Delay</string>
@@ -661,6 +663,9 @@
     <string name="sound_vibrate_in_call_title">Vibrate during calls</string>
     <string name="sound_vibrate_in_call_summary_off">Notifications will not vibrate during a call</string>
     <string name="sound_vibrate_in_call_summary_on">Notifications will vibrate normally</string>
+    <string name="sound_volume_key_beeps_title">Volume key beeps</string>
+    <string name="sound_volume_key_beeps_summary_off">Do not beep after changing the ringer volume using the volume keys</string>
+    <string name="sound_volume_key_beeps_summary_on">Beep after changing the ringer volume using thevolume keys</string>
     <string name="sound_camera_shutter_disable_title">Mute camera shutter</string>
     <string name="sound_camera_shutter_disable_summary_on">Shutter sound will not be played</string>
     <string name="sound_camera_shutter_disable_summary_off">Shutter sound will be played</string>
@@ -683,6 +688,8 @@
     <string name="sound_notifications_limitvol_dialog">Notification volume</string>
     <string name="sound_rings_limitvol_dialog">Ring tone volume</string>
     <string name="sound_alarms_limitvol_dialog">Alarm volume</string>
+    <string name="sound_swap_volume_keys_dialog">Swap volume keys</string>
+    <string name="sound_swap_volume_keys_title">Swap volume keys</string>
 
     <!-- Quiet hours -->
     <string name="sound_category_quiet_hours_title">Quiet hours</string>
