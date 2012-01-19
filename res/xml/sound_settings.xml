@@ -23,13 +23,19 @@
 		        android:entries="@array/swap_volume_keys_orientation_list_entries"
 		        android:entryValues="@array/swap_volume_keys_orientation_list_values"
 		        android:persistent="false" />
-
+		
         <!-- Vibrate on call -->
 		<CheckBoxPreference android:key="vibrate-in-call"
 			android:title="@string/sound_vibrate_in_call_title"
 			android:summaryOn="@string/sound_vibrate_in_call_summary_on"
 			android:summaryOff="@string/sound_vibrate_in_call_summary_off"
 			android:persistent="false" />
+			
+		<!-- Default volume media --> 
+            <CheckBoxPreference android:key="default-volume-media" 
+                    android:title="@string/sound_default_volume_media_title" 
+                    android:summary="@string/sound_default_volume_media_summary" 
+                    android:persistent="false" /> 	
 
 		<!--  Volume key beeps -->
 	        <CheckBoxPreference android:key="volume-key-beeps"

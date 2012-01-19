@@ -142,10 +142,10 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
         mLockscreenStyle = LockscreenStyle.getStyleById(
                 Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_STYLE_PREF, LockscreenStyle.getIdByStyle(LockscreenStyle.Ring)));
-        mLockscreenStylePref.setValue(String.valueOf(LockscreenStyle.getIdByStyle(mLockscreenStyle)));
+	mLockscreenStylePref.setValue(String.valueOf(LockscreenStyle.getIdByStyle(mLockscreenStyle)));
         mLockscreenStylePref.setOnPreferenceChangeListener(this);
 
-        /* Incall Style */
+	/* Incall Style */
         mInCallStylePref = (ListPreference) prefSet.findPreference(IN_CALL_STYLE_PREF);
         mInCallStyle = InCallStyle.getStyleById(
                 Settings.System.getInt(getContentResolver(),
@@ -153,7 +153,7 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
         mInCallStylePref.setValue(String.valueOf(InCallStyle.getIdByStyle(mInCallStyle)));
         mInCallStylePref.setOnPreferenceChangeListener(this);
 
-        /* Rotary Style */
+	/* Rotary Style */
         mRotaryStylePref = (ListPreference) prefSet.findPreference(ROTARY_STYLE_PREF);
         mRotaryStyle = RotaryStyle.getStyleById(
                 Settings.System.getInt(getContentResolver(),
@@ -168,7 +168,7 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
                 Settings.System.RINGLOCK_STYLE_PREF, RinglockStyle.getIdByStyle(RinglockStyle.Bubble)));
         mRinglockStylePref.setValue(String.valueOf(RinglockStyle.getIdByStyle(mRinglockStyle)));
         mRinglockStylePref.setOnPreferenceChangeListener(this);
-
+ 
         mRingUnlockMiddleToggle = (CheckBoxPreference) prefSet
                 .findPreference(LOCKSCREEN_RING_UNLOCK_MIDDLE_TOGGLE);
         mRingUnlockMiddleToggle.setChecked(Settings.System.getInt(getContentResolver(),
@@ -179,7 +179,7 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
         mRingMinimalToggle.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.LOCKSCREEN_RING_MINIMAL, 0) == 1);
 
-        /* Rotary related options */
+	/* Rotary related options */
         mRotaryUnlockDownToggle = (CheckBoxPreference) prefSet
                 .findPreference(LOCKSCREEN_ROTARY_UNLOCK_DOWN_TOGGLE);
         mRotaryUnlockDownToggle.setChecked(Settings.System.getInt(getContentResolver(),
@@ -435,7 +435,7 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
             mRinglockStyle = RinglockStyle.getStyleById((String) newValue);
             Settings.System.putInt(getContentResolver(), Settings.System.RINGLOCK_STYLE_PREF,
                     RinglockStyle.getIdByStyle(mRinglockStyle));
-            return true;
+	    return true;
         }
         if (preference == mCustomBackground) {
             int indexOf = mCustomBackground.findIndexOfValue(val);
@@ -505,6 +505,7 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
     }
 
     private void updateStylePrefs(LockscreenStyle lockscreenStyle, InCallStyle inCallStyle) {
+      
         ArrayList<Preference> lockscreenCatPrefs = new ArrayList<Preference>();
         ArrayList<Boolean> lockscreenCatPrefsEnable = new ArrayList<Boolean>();
         ArrayList<Preference> inCallCatPrefs = new ArrayList<Preference>();
@@ -540,7 +541,7 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
             case Ring:
                 mCustomAppTogglePref.setSummary(R.string.pref_lockscreen_custom_app_toggle_ring_summary);
 
-                lockscreenCatPrefs.add(mRinglockStylePref);
+		lockscreenCatPrefs.add(mRinglockStylePref);
                 lockscreenCatPrefsEnable.add(true);
 
                 lockscreenCatPrefs.add(mCustomAppTogglePref);
@@ -559,7 +560,7 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
             case Rotary:
                 mCustomAppTogglePref.setSummary(R.string.pref_lockscreen_custom_app_toggle_rotary_summary);
 
-                lockscreenCatPrefs.add(mRotaryStylePref);
+		lockscreenCatPrefs.add(mRotaryStylePref);
                 lockscreenCatPrefsEnable.add(true);
 
                 lockscreenCatPrefs.add(mCustomAppTogglePref);
@@ -584,10 +585,10 @@ public class LockscreenStyleActivity extends PreferenceActivity implements
 
         if (inCallStyle == InCallStyle.Rotary && lockscreenStyle != LockscreenStyle.Rotary) {
             prefSet.addPreference(mCategoryStyleInCall);
-            inCallCatPrefs.add(mRotaryStylePref);
+	    inCallCatPrefs.add(mRotaryStylePref);
             inCallCatPrefsEnable.add(true);
             inCallCatPrefs.add(mRotaryHideArrowsToggle);
-            inCallCatPrefsEnable.add(true);
+	    inCallCatPrefsEnable.add(true);
         } else if (inCallStyle == InCallStyle.Ring && lockscreenStyle != LockscreenStyle.Ring) {
             prefSet.addPreference(mCategoryStyleInCall);
             inCallCatPrefs.add(mRinglockStylePref);

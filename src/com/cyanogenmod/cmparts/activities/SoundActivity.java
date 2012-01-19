@@ -57,6 +57,8 @@ public class SoundActivity extends PreferenceActivity implements OnPreferenceCha
     private static final String SWAP_VOLUME_KEYS = "swap-vol-keys";
 
     private static final String VIBRATE_IN_CALL = "vibrate-in-call";
+	
+	private static final String DEFAULT_VOLUME_MEDIA = "default-volume-media";
 
     private static final String VOLUME_KEY_BEEPS = "volume-key-beeps";
 
@@ -106,6 +108,11 @@ public class SoundActivity extends PreferenceActivity implements OnPreferenceCha
         p.setChecked(Settings.System.getInt(getContentResolver(),
                 Settings.System.VOLUME_CONTROL_SILENT, 0) != 0);
         p.setOnPreferenceChangeListener(this);
+		
+		p = (CheckBoxPreference) prefSet.findPreference(DEFAULT_VOLUME_MEDIA); 
+        p.setChecked(Settings.System.getInt(getContentResolver(), 
+                Settings.System.DEFAULT_VOLUME_CONTROL_MEDIA, 0) != 0); 
+        p.setOnPreferenceChangeListener(this); 
 
         p = (CheckBoxPreference) prefSet.findPreference(VIBRATE_IN_CALL);
         p.setChecked(Settings.System.getInt(getContentResolver(),
@@ -185,7 +192,7 @@ public class SoundActivity extends PreferenceActivity implements OnPreferenceCha
         } else if (key.equals(VOLUME_CONTROL_SILENT)) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_CONTROL_SILENT,
                     getBoolean(newValue) ? 1 : 0);
-	} else if (key.equals(SWAP_VOLUME_KEYS)) {
+		} else if (key.equals(SWAP_VOLUME_KEYS)) {
             Settings.System.putInt(getContentResolver(), Settings.System.SWAP_VOLUME_KEYS_ORIENTATION,
                     getInt(newValue));
             ((AudioManager)getSystemService(AUDIO_SERVICE)).reloadAudioSettings();
@@ -193,14 +200,17 @@ public class SoundActivity extends PreferenceActivity implements OnPreferenceCha
         } else if (key.equals(VIBRATE_IN_CALL)) {
             Settings.System.putInt(getContentResolver(), Settings.System.VIBRATE_IN_CALL,
                     getBoolean(newValue) ? 1 : 0);
-	} else if (key.equals(VOLUME_KEY_BEEPS)) {
+		} else if (key.equals(DEFAULT_VOLUME_MEDIA)) { 
+            Settings.System.putInt(getContentResolver(), Settings.System.DEFAULT_VOLUME_CONTROL_MEDIA, 
+                    getBoolean(newValue) ? 1 : 0); 
+		} else if (key.equals(VOLUME_KEY_BEEPS)) {
             Settings.System.putInt(getContentResolver(), Settings.System.VOLUME_KEY_BEEPS,
                     getBoolean(newValue) ? 1 : 0);
         } else if (key.equals(NOTIFICATIONS_SPEAKER) || key.equals(RINGS_SPEAKER)
                 || key.equals(ALARMS_SPEAKER)) {
             SystemProperties.set(getKey(key), getBoolean(newValue) ? "1" : "0");
-	} else if (key.equals(CAMERA_FOCUS_MUTE)) {
-	    Settings.System.putInt(getContentResolver(), Settings.System.CAMERA_FOCUS_MUTE,
+		} else if (key.equals(CAMERA_FOCUS_MUTE)) {
+			Settings.System.putInt(getContentResolver(), Settings.System.CAMERA_FOCUS_MUTE,
 		    getBoolean(newValue) ? 1 : 0);
         } else if (key.equals(CAMERA_SHUTTER_MUTE)) {
             if (getBoolean(newValue)) {
