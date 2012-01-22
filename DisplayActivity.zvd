@@ -73,12 +73,12 @@ public class DisplayActivity extends PreferenceActivity implements OnPreferenceC
 
         PreferenceScreen prefSet = getPreferenceScreen();
 
-	Resources res = getResources();
+        Resources res = getResources();
 
-        /* Preference Screens */
         mBacklightScreen = (PreferenceScreen) prefSet.findPreference(BACKLIGHT_SETTINGS);
-        // No reason to show backlight if no light sensor on device
-        if (((SensorManager) getSystemService(SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
+	// No reason to show backlight if no light sensor on device
+        /* Hide backlight settings if unsupported */
+	if (((SensorManager) getSystemService(SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
             ((PreferenceCategory) prefSet.findPreference(GENERAL_CATEGORY))
                     .removePreference(mBacklightScreen);
         }
